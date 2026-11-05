@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hangman</title>
+    <link rel="stylesheet" href="../css/site.css" />
+    <style>
+      #figure {
+        width: 10rem;
+        max-width: 100%;
+        height: auto;
+        stroke: currentColor;
+        stroke-width: 4;
+        fill: none;
+        stroke-linecap: round;
+      }
+      #word {
+        font-family: monospace;
+        font-size: 2rem;
+        letter-spacing: 0.4rem;
+        overflow-wrap: anywhere;
+      }
+      #keyboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(2.75rem, 1fr));
+        gap: 0.4rem;
+        max-width: 100%;
+        margin: 1rem 0;
+      }
+      #keyboard button {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      #keyboard button.correct {
+        background: #b7e4c7;
+        color: #000;
+      }
+      #keyboard button.wrong {
+        background: #f5b7b1;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hangman</h1>
+    <svg id="figure" viewBox="0 0 120 140" role="img" aria-label="Hangman figure">
+      <line x1="10" y1="130" x2="110" y2="130" />
+      <line x1="30" y1="130" x2="30" y2="10" />
+      <line x1="30" y1="10" x2="80" y2="10" />
+      <line x1="80" y1="10" x2="80" y2="25" />
+      <circle id="part-head" cx="80" cy="37" r="12" hidden />
+      <line id="part-body" x1="80" y1="49" x2="80" y2="90" hidden />
+      <line id="part-arm-left" x1="80" y1="60" x2="62" y2="78" hidden />
+      <line id="part-arm-right" x1="80" y1="60" x2="98" y2="78" hidden />
+      <line id="part-leg-left" x1="80" y1="90" x2="64" y2="115" hidden />
+      <line id="part-leg-right" x1="80" y1="90" x2="96" y2="115" hidden />
+    </svg>
+    <p id="word" aria-label="Word"></p>
+    <p id="wrong-letters"></p>
+    <p id="guesses-left"></p>
+    <p id="status" role="status" aria-live="polite"></p>
+    <div id="keyboard"></div>
+    <p>
+      <button type="button" id="new-game">New game</button>
+      <button type="button" id="reset-tally">Reset tally</button>
+    </p>
+    <p id="tally"></p>
+    <noscript><p>This game needs JavaScript.</p></noscript>
+    <p><a href="../">Back to the hub</a></p>
+    <script type="module" src="ui.js"></script>
+  </body>
+</html>

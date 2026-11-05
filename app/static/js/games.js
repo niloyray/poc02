@@ -9,6 +9,11 @@ export const games = [
     description: "Bounce the ball and clear the bricks.",
     path: "breakout/",
   },
+  {
+    title: "Hangman",
+    description: "Guess the word before the figure is drawn.",
+    path: "hangman/",
+  },
 ];
 
 if (typeof document !== "undefined") {

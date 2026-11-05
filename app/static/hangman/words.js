@@ -1,0 +1,15 @@
+export const WORDS = [
+  "apple", "yellow", "button", "garden", "window", "pencil", "rabbit", "summer",
+  "winter", "planet", "bottle", "candle", "castle", "circle", "forest", "guitar",
+  "hammer", "island", "jacket", "kitten", "ladder", "monkey", "napkin", "orange",
+  "pepper", "pillow", "pocket", "puzzle", "river", "rocket", "saddle", "school",
+  "spider", "sunset", "table", "tiger", "turtle", "valley", "wagon", "yogurt",
+  "zebra", "anchor", "basket", "bridge", "cheese", "cookie", "dragon", "engine",
+  "feather", "flower", "ground", "honey", "jungle", "kettle", "lemon", "magnet",
+  "mirror", "needle", "ocean", "paper", "queen", "ribbon", "shadow", "silver",
+  "simple", "spoon", "stone", "storm", "sugar", "thunder", "ticket", "towel",
+  "train", "violin", "walnut", "wheel", "whistle", "wizard", "carpet", "cherry",
+  "clover", "doctor", "eagle", "fabric", "grape", "hollow", "insect", "jelly",
+  "knight", "lizard", "mango", "noodle", "otter", "parrot", "quiet", "shovel",
+  "tunnel", "violet", "rain", "cloud",
+];
