@@ -18,7 +18,7 @@ def test_healthz():
     assert r.json() == {"status": "ok"}
 
 
-@pytest.mark.parametrize("path", ["/tictactoe/", "/breakout/", "/hangman/"])
+@pytest.mark.parametrize("path", ["/tictactoe/", "/breakout/", "/hangman/", "/jumble/"])
 def test_game_pages(path):
     r = client.get(path)
     assert r.status_code == 200
@@ -35,6 +35,31 @@ def test_hangman_scripts(name):
 
 def test_hub_lists_hangman():
     assert "hangman/" in client.get("/js/games.js").text
+
+
+@pytest.mark.parametrize("name", ["ui.js", "logic.js", "words.js"])
+def test_jumble_scripts(name):
+    assert "ui.js" in client.get("/jumble/").text
+    r = client.get(f"/jumble/{name}")
+    assert r.status_code == 200
+    assert "javascript" in r.headers["content-type"]
+
+
+def test_hub_lists_jumble():
+    assert "jumble/" in client.get("/js/games.js").text
+
+
+def test_jumble_page_accessibility():
+    html = client.get("/jumble/").text
+    assert '<label for="answer">' in html
+    for attr in (
+        'maxlength="7"',
+        'autocorrect="off"',
+        'autocapitalize="off"',
+        'spellcheck="false"',
+    ):
+        assert attr in html
+    assert 'aria-live="polite"' in html
 
 
 @pytest.mark.parametrize(
