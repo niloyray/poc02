@@ -14,6 +14,11 @@ export const games = [
     description: "Guess the word before the figure is drawn.",
     path: "hangman/",
   },
+  {
+    title: "Word jumble",
+    description: "Unscramble the letters to find the word.",
+    path: "jumble/",
+  },
 ];
 
 if (typeof document !== "undefined") {
