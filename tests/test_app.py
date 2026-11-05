@@ -18,11 +18,23 @@ def test_healthz():
     assert r.json() == {"status": "ok"}
 
 
-@pytest.mark.parametrize("path", ["/tictactoe/", "/breakout/"])
+@pytest.mark.parametrize("path", ["/tictactoe/", "/breakout/", "/hangman/"])
 def test_game_pages(path):
     r = client.get(path)
     assert r.status_code == 200
     assert "Back to the hub" in r.text
+
+
+@pytest.mark.parametrize("name", ["ui.js", "logic.js", "words.js"])
+def test_hangman_scripts(name):
+    assert "ui.js" in client.get("/hangman/").text
+    r = client.get(f"/hangman/{name}")
+    assert r.status_code == 200
+    assert "javascript" in r.headers["content-type"]
+
+
+def test_hub_lists_hangman():
+    assert "hangman/" in client.get("/js/games.js").text
 
 
 @pytest.mark.parametrize(
