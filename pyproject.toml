@@ -1,0 +1,13 @@
+[project]
+name = "poc02"
+version = "0.1.0"
+description = "poc02 game site"
+requires-python = ">=3.12"
+dependencies = ["fastapi", "uvicorn"]
+
+[dependency-groups]
+dev = ["pytest", "httpx"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
