@@ -1,4 +1,9 @@
 export const MAX_WRONG = 6;
+export const PARTS = ["head", "body", "arm-left", "arm-right", "leg-left", "leg-right"];
+
+export function partsShown(state) {
+  return PARTS.slice(0, Math.min(Math.max(state.wrong, 0), PARTS.length));
+}
 
 export function newGame(word) {
   return { word, guessed: [], wrong: 0, status: "playing" };

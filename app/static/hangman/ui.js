@@ -1,19 +1,20 @@
 import { WORDS } from "./words.js";
 import {
   MAX_WRONG,
+  PARTS,
   emptyTally,
   guess,
   guessesLeft,
   maskedWord,
   newGame,
   parseTally,
+  partsShown,
   pickWord,
   recordResult,
   wrongLetters,
 } from "./logic.js";
 
 const KEY = "poc02.hangman.tally";
-const PARTS = ["head", "body", "arm-left", "arm-right", "leg-left", "leg-right"];
 
 function loadTally() {
   try {
@@ -39,6 +40,7 @@ function init() {
   const statusEl = document.getElementById("status");
   const keyboardEl = document.getElementById("keyboard");
   const tallyEl = document.getElementById("tally");
+  const figureEl = document.getElementById("figure");
   const buttons = new Map();
   let state = newGame(pickWord(WORDS, Math.random, undefined));
   let tally = loadTally();
@@ -70,9 +72,14 @@ function init() {
     wrongEl.textContent =
       "Wrong guesses: " + (wrongs.length ? wrongs.map((l) => l.toUpperCase()).join(", ") : "none");
     leftEl.textContent = "Guesses left: " + guessesLeft(state) + " of " + MAX_WRONG;
-    PARTS.forEach((p, i) => {
-      document.getElementById("part-" + p).hidden = !(state.wrong > i);
-    });
+    const drawn = partsShown(state);
+    for (const p of PARTS) {
+      document.getElementById("part-" + p).classList.toggle("shown", drawn.includes(p));
+    }
+    figureEl.setAttribute(
+      "aria-label",
+      "Hangman figure: " + drawn.length + " of " + PARTS.length + " parts drawn",
+    );
     for (const [letter, b] of buttons) {
       const done = state.guessed.includes(letter);
       const good = state.word.includes(letter);
