@@ -4,12 +4,14 @@ import test from "node:test";
 import { WORDS } from "../../app/static/hangman/words.js";
 import {
   MAX_WRONG,
+  PARTS,
   emptyTally,
   guess,
   guessesLeft,
   maskedWord,
   newGame,
   parseTally,
+  partsShown,
   pickWord,
   recordResult,
   wrongLetters,
@@ -18,6 +20,34 @@ import {
 function guessAll(state, letters) {
   return [...letters].reduce((s, l) => guess(s, l), state);
 }
+
+test("partsShown: none for a new game", () => {
+  assert.deepEqual(partsShown(newGame("apple")), []);
+});
+
+test("partsShown: one more part per wrong guess, in drawing order", () => {
+  assert.deepEqual(PARTS, ["head", "body", "arm-left", "arm-right", "leg-left", "leg-right"]);
+  for (let n = 1; n <= 6; n++) {
+    const s = guessAll(newGame("apple"), "zxcvbq".slice(0, n));
+    assert.equal(s.wrong, n);
+    assert.deepEqual(partsShown(s), PARTS.slice(0, n));
+  }
+});
+
+test("partsShown: a correct guess changes nothing", () => {
+  const s = guessAll(newGame("apple"), "zx");
+  assert.deepEqual(partsShown(guess(s, "a")), partsShown(s));
+});
+
+test("partsShown returns a new array and does not mutate state", () => {
+  const s = guessAll(newGame("apple"), "zx");
+  const copy = structuredClone(s);
+  const a = partsShown(s);
+  a.push("extra");
+  assert.deepEqual(s, copy);
+  assert.deepEqual(partsShown(s), ["head", "body"]);
+  assert.equal(PARTS.length, 6);
+});
 
 test("word list: 100 unique words of 4-7 lower-case letters", () => {
   assert.equal(WORDS.length, 100);

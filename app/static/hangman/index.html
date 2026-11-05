@@ -15,6 +15,9 @@
         fill: none;
         stroke-linecap: round;
       }
+      #figure .part:not(.shown) {
+        display: none;
+      }
       #word {
         font-family: monospace;
         font-size: 2rem;
@@ -47,17 +50,17 @@
   </head>
   <body>
     <h1>Hangman</h1>
-    <svg id="figure" viewBox="0 0 120 140" role="img" aria-label="Hangman figure">
+    <svg id="figure" viewBox="0 0 120 140" role="img" aria-label="Hangman figure: 0 of 6 parts drawn">
       <line x1="10" y1="130" x2="110" y2="130" />
       <line x1="30" y1="130" x2="30" y2="10" />
       <line x1="30" y1="10" x2="80" y2="10" />
       <line x1="80" y1="10" x2="80" y2="25" />
-      <circle id="part-head" cx="80" cy="37" r="12" hidden />
-      <line id="part-body" x1="80" y1="49" x2="80" y2="90" hidden />
-      <line id="part-arm-left" x1="80" y1="60" x2="62" y2="78" hidden />
-      <line id="part-arm-right" x1="80" y1="60" x2="98" y2="78" hidden />
-      <line id="part-leg-left" x1="80" y1="90" x2="64" y2="115" hidden />
-      <line id="part-leg-right" x1="80" y1="90" x2="96" y2="115" hidden />
+      <circle id="part-head" class="part" cx="80" cy="37" r="12" />
+      <line id="part-body" class="part" x1="80" y1="49" x2="80" y2="90" />
+      <line id="part-arm-left" class="part" x1="80" y1="60" x2="62" y2="78" />
+      <line id="part-arm-right" class="part" x1="80" y1="60" x2="98" y2="78" />
+      <line id="part-leg-left" class="part" x1="80" y1="90" x2="64" y2="115" />
+      <line id="part-leg-right" class="part" x1="80" y1="90" x2="96" y2="115" />
     </svg>
     <p id="word" aria-label="Word"></p>
     <p id="wrong-letters"></p>
